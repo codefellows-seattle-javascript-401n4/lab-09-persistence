@@ -1,0 +1,25 @@
+{
+  "name": "lab-09-persistence",
+  "version": "1.0.0",
+  "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 09: Vanilla REST API w/ Persistence ======",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanhthaoluu/lab-09-persistence.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanhthaoluu/lab-09-persistence/issues"
+  },
+  "homepage": "https://github.com/hanhthaoluu/lab-09-persistence#readme",
+  "devDependencies": {
+    "expect": "^21.2.1",
+    "jest": "^21.2.1",
+    "mocha": "^4.0.1"
+  }
+}
