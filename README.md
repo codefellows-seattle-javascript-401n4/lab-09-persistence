@@ -1,6 +1,8 @@
 ![cf](https://i.imgur.com/7v5ASc8.png) Lab 09: Vanilla REST API w/ Persistence
 ======
 
+PLEASE REFER to LAB08.  IT HAS THE CODE FOR THE STORAGE.  THANK YOU.
+
 ## Submission Instructions
   * fork this repository & create a new branch for your work
   * write all of your code in a directory named `lab-` + `<your name>` **e.g.** `lab-susan`
