@@ -1,0 +1,31 @@
+{
+  "name": "lab-08-rest",
+  "version": "1.0.0",
+  "description": "REST Lab",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarDavis/lab-08-rest.git"
+  },
+  "author": "darryl d",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarDavis/lab-08-rest/issues"
+  },
+  "homepage": "https://github.com/DarDavis/lab-08-rest#readme",
+  "devDependencies": {
+    "jest": "^21.2.1"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "fs-extra": "^4.0.2",
+    "superagent": "^3.6.3",
+    "uuid": "^3.1.0"
+  }
+}
