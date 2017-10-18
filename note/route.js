@@ -13,8 +13,19 @@ function post(body, res) {
   note.addNote().then(() => {
     send.sendJSON(res, 200, note);
   }).catch((e) => {
-    send.sendResponse(res, 400, `post failed with following error: ${e}`)
+    send.sendResponse(res, 400, `post failed with following error: ${e}`);
   });
+}
+
+function idQueryTest(req, res){
+  let ret = false;
+  if (req.url && req.url.query && req.url.query.id) {
+    ret = true;
+  } else {
+    send.sendResponse(res, 400, `need ID`);
+    ret =  false;
+  }
+  return ret;
 }
 
 routes.post('/api/notes', (req,res) => {
@@ -22,8 +33,7 @@ routes.post('/api/notes', (req,res) => {
 });
 
 routes.delete('/api/notes', (req, res) => {
-  let isIdQuery = req.url && req.url.query && req.url.query.id ? true: false;
-  if (isIdQuery) {
+  if (idQueryTest(req, res)) {
     let id = req.url.query.id;
     let note = new Note(Object.assign({}, Note.allNotes[id]));
     if (note) {
@@ -37,24 +47,18 @@ routes.delete('/api/notes', (req, res) => {
     } else {
       send.sendResponse(res, 404, `no note with the ID ${req.url.query.id}`);
     }
-  } else {
-    send.sendResponse(res, 400, `need ID`);
   }
 });
 
 routes.put('/api/notes', (req,res) => {
-  let isIdQuery = req.url && req.url.query && req.url.query.id ? true: false;
-  if (isIdQuery) {
+  if (idQueryTest(req, res)) {
     Note.allNotes[req.url.query.id] = {};
     post(req.body, res);
-  } else {
-    send.sendResponse(res, 404, `need an ID to put`);
   }
 });
 
 routes.patch('/api/notes', (req,res) => {
-  let isIdQuery = req.url && req.url.query && req.url.query.id ? true: false;
-  if (isIdQuery) {
+  if (idQueryTest(req, res)) {
     let currentNote = Note.getNote(req.url.query.id);
     let updatedNote = (req.body);
     if (currentNote) {
@@ -63,10 +67,7 @@ routes.patch('/api/notes', (req,res) => {
     } else {
       send.sendResponse(res, 404, `cannot find a note for the id: ${req.url.query.id}`);
     }
-  } else {
-    send.sendResponse(res, 404, `need an ID to patch`);
   }
-
 });
 
 let sendNote = function(req, res){
@@ -100,6 +101,4 @@ routes.get('/api/notes', (req,res) => {
       send.sendResponse(res, status, 'no notes! this is pretty terrible');
     }
   }
-
-
 });

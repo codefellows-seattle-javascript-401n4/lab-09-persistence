@@ -22,10 +22,10 @@ class Note {
       fs.outputJson(db, Note.allNotes)
         .then(() => resolve(true))
         .catch(err => {
-          reject(err)
-        })
+          reject(err);
+        });
     });
-  };
+  }
 
   addNote() {
     Note.allNotes[this.id] = this;
@@ -33,8 +33,8 @@ class Note {
       fs.outputJson(db, Note.allNotes)
         .then(() => resolve(true))
         .catch(err => {
-          reject(err)
-        })
+          reject(err);
+        });
     });
   }
 }
@@ -44,15 +44,12 @@ Note.allNotes = {};
 Note.loadAll = function(){
   fs.readJson(db)
     .then(packageObj => {
-      Note.allNotes = packageObj
+      Note.allNotes = packageObj;
     })
     .catch(err => {
-      console.error(err)
-    })
-}
-
-
-
+      console.error(err);
+    });
+};
 
 Note.getNote = function(id) {
   let note = false;

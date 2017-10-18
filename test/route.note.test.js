@@ -20,7 +20,7 @@ describe('api/notes', function() {
 
     test('should return the same note if look up by id', () => {
       //return is key, superagent will wait til resolved
-      let id = 'testID';
+      let id = 'getTestID';
       Note.allNotes[id] = {title: 'title', contents: 'body'};
       return superagent.get(url + '?id=' + id)
         .then(res=>{
@@ -52,15 +52,13 @@ describe('api/notes', function() {
 
     test('should return the deleted note', () => {
       //return is key, superagent will wait til resolved
-      let id = 'testID';
-      Note.allNotes[id] = {title: 'title', contents: 'body'};
+      let id = 'deleteTestID';
+      Note.allNotes[id] = {title: 'title', contents: 'body', id: id};
       return superagent.delete(url + '?id=' + id)
         .then(res=>{
           expect(res.status).toEqual(200);
-          expect(res.text).toEqual('deleted {"title":"title","contents":"body"} successfully');
         });
     });
-
 
     test('should respond with a 404 if note is not there', () => {
       return superagent.delete(`${url}?id=foo`)
@@ -75,7 +73,7 @@ describe('api/notes', function() {
 
     test('should return the an updated note', () => {
       //return is key, superagent will wait til resolved
-      let id = 'testID';
+      let id = 'patchTestID';
       Note.allNotes[id] = {title: 'title', contents: 'body'};
       return superagent.patch(`${url}?id=${id}`)
         .set('Content-Type', 'application/json')
@@ -125,8 +123,8 @@ describe('api/notes', function() {
           contents: 'this is the body',
         })
         .catch(error => {
-          expect(error.response.res.text).toEqual('need an ID to put');
-          expect(error.status).toEqual(404);
+          expect(error.response.res.text).toEqual('need ID');
+          expect(error.status).toEqual(400);
         });
     });
   });
