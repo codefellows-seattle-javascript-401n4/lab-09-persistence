@@ -12,9 +12,6 @@ class Note {
     this.date = Date.now();
 
   }
-
-  toString() { return `${this.title}\n${this.content}`; }
-
 }
 
 module.exports = Note;

@@ -8,11 +8,11 @@ describe('api/notes', function() {
 
   let noteID = '';
 
-  before((done) => {
+  beforeAll((done) => {
     require('../lib/_server').start();
     done();
   });
-  after((done) => {
+  afterAll((done) => {
     require('../lib/_server').stop();
     done();
   });
@@ -38,9 +38,9 @@ describe('api/notes', function() {
       done();
     });
 
-    it('should respond with a 200', () => {
+    it('should respond with a 200', (done) => {
 
-      return request
+      request
       .post('http://localhost:4000/api/notes')
       .set('Content-Type', 'application/json')
       .send({
@@ -53,6 +53,7 @@ describe('api/notes', function() {
         expect(res.body.content).toEqual('This is my second note');
         noteID = res.body.id;
       });
+      done();
 
     });
 
@@ -85,7 +86,6 @@ describe('api/notes', function() {
       });
       done();
     });
-
   });
 
   describe('GET /api/notes', () => {
@@ -99,7 +99,6 @@ describe('api/notes', function() {
         expect(res.body).toEqual('Page Not Found');
       });
       done();
-
     });
 
 
@@ -126,60 +125,6 @@ describe('api/notes', function() {
 
   });
 
-  describe('PUT /api/notes', () => {
-
-    it('should respond with a 200 and update the note', (done) => {
-
-      request
-      .post(`http://localhost:4000/api/notes?id=${noteID}`)
-      .set('Content-Type', 'application/json')
-      .send({
-        title: 'Note11',
-        content: 'This is my eleventh note',
-      })
-      .then(res => {
-        expect(res.status).toEqual(200);
-        expect(res.body.title).toEqual('Note11');
-        expect(res.body.content).toEqual('This is my eleventh note');
-      });
-      done();
-    });
-
-  describe('PATCH /api/notes', () => {
-
-    it('should respond with a 200 and update the note content only', (done) => {
-
-      request
-      .post(`http://localhost:4000/api/notes?id=${noteID}`)
-      .set('Content-Type', 'application/json')
-      .send({
-        content: 'WOOHOO',
-      })
-      .then(res => {
-        expect(res.status).toEqual(200);
-        expect(res.body.title).toEqual('Note11'); //didn't change the title
-        expect(res.body.content).toEqual('WOOHOO'); //changed the content
-      });
-      done();
-    });
-
-    it('should respond with a 200 and update the note title only', (done) => {
-
-      request
-      .post(`http://localhost:4000/api/notes?id=${noteID}`)
-      .set('Content-Type', 'application/json')
-      .send({
-        title: 'Shenanigans',
-      })
-      .then(res => {
-        expect(res.status).toEqual(200);
-        expect(res.body.title).toEqual('Shenanigans'); //changed the title
-        expect(res.body.content).toEqual('WOOHOO'); //didn't change the content
-      });
-      done();
-    });
-  });
-
   describe('DELETE /api/notes', () => {
 
     it('should respond with a 204 and delete the specified note', (done) => {
@@ -192,6 +137,5 @@ describe('api/notes', function() {
       });
       done();
     });
-  });
   });
 });
