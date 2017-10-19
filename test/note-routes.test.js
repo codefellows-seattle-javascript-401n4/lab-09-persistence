@@ -1,7 +1,7 @@
 'use strict';
 
 process.env.PORT = 4000;
-const request = require('superagent');
+const superagent = require('superagent');
 const expect = require('expect');
 
 describe('api/notes', function() {
@@ -20,10 +20,9 @@ describe('api/notes', function() {
 
   describe('POST /api/notes', () => {
 
-    it('should respond with a 200', (done) => {
+    test('should respond with a 200', () => {
 
-      request
-      .post('http://localhost:4000/api/notes')
+      return superagent.post('http://localhost:4000/api/notes')
       .set('Content-Type', 'application/json')
       .send({
         title: 'Note1',
@@ -35,13 +34,11 @@ describe('api/notes', function() {
         expect(res.body.content).toEqual('This is my first note');
         noteID = res.body.id;
       });
-      done();
     });
 
-    it('should respond with a 200', (done) => {
+    test('should respond with a 200', () => {
 
-      request
-      .post('http://localhost:4000/api/notes')
+      return superagent.post('http://localhost:4000/api/notes')
       .set('Content-Type', 'application/json')
       .send({
         title: 'Note2',
@@ -53,14 +50,11 @@ describe('api/notes', function() {
         expect(res.body.content).toEqual('This is my second note');
         noteID = res.body.id;
       });
-      done();
-
     });
 
     it('should respond with a 400 and "Missing Title"', (done) => {
 
-      request
-      .post('http://localhost:4000/api/notes')
+      superagent.post('http://localhost:4000/api/notes')
       .set('Content-Type;', 'application/json')
       .send({
         content: 'This is my first note',
@@ -74,8 +68,7 @@ describe('api/notes', function() {
 
     it('should respond with a 400 and "Missing Content"', (done) =>{
 
-      request
-      .post('http://localhost:5500/api/notes')
+      superagent.post('http://localhost:4000/api/notes')
       .set('Content-Type', 'application/json')
       .send({
         title: 'Some Fabulous Title',
@@ -88,12 +81,12 @@ describe('api/notes', function() {
     });
   });
 
+
   describe('GET /api/notes', () => {
 
-    it('should return a 404 for an unregistered route', (done) => {
+    test('should return a 404 for an unregistered route', (done) => {
 
-      request
-      .get('http://localhost:4000/api/goats')
+      superagent.get('http://localhost:4000/api/goats')
       .then(res => {
         expect(res.status).toEqual(404);
         expect(res.body).toEqual('Page Not Found');
@@ -102,21 +95,25 @@ describe('api/notes', function() {
     });
 
 
-    it('should return all notes if no id is specified', (done) => {
+    test('should return all notes if no id is specified', (done) => {
 
-      request
-      .get(`http://localhost:4000/api/notes`)
+      superagent.get(`http://localhost:4000/api/notes`)
       .then(res => {
+
+        let titles = [];
+
+        res.body.forEach((note) => titles.push(note.title));
+
         expect(res.status).toEqual(200);
-        expect(res.body).not.toBe(null);
+        expect(titles[0]).toEqual('Note1');
+        expect(titles[1]).toEqual('Note2');
       });
       done();
     });
 
-    it('should return a 200 for a valid note id', (done) => {
+    test('should return a 200 for a valid note id', (done) => {
 
-      request
-      .get(`http://localhost:4000/api/notes?=${noteID}`)
+      superagent.get(`http://localhost:4000/api/notes?=${noteID}`)
       .then(res => {
         expect(res.status).toEqual(200);
       });
@@ -127,10 +124,9 @@ describe('api/notes', function() {
 
   describe('DELETE /api/notes', () => {
 
-    it('should respond with a 204 and delete the specified note', (done) => {
+    test('should respond with a 204 and delete the specified note', (done) => {
 
-      request
-      .post(`http://localhost:4000/api/notes?id=${noteID}`)
+      superagent.post(`http://localhost:4000/api/notes?id=${noteID}`)
       .then(res => {
         expect(res.status).toEqual(204);
         expect(res.message).toEqual('No Content');
@@ -138,4 +134,5 @@ describe('api/notes', function() {
       done();
     });
   });
+
 });
