@@ -2,14 +2,15 @@
 
 const uuid = require('uuid/v1');
 
-class Note{
+class Car{
 
   constructor(config){
     this.id = uuid();
     this.createdOn = new Date();
-    this.title = config.title || '';
-    this.content = config.content || '';
+    this.make = config.make || '';
+    this.model = config.model || '';
+
   }
 }
 
-module.exports = Note;
+module.exports = Car;

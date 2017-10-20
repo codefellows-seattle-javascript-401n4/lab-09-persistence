@@ -5,32 +5,32 @@ process.env.PORT = 5500;
 const server = require('../lib/server');
 const superagent = require('superagent');
 
-describe('api/notes', function() {
+describe('api/cars', function() {
 
   beforeAll(server.start);
   afterAll(server.stop);
 
-  describe('POST /api/notes', () => {
+  describe('POST /api/cars', () => {
 
     test('should respond with a 200', () =>{
-      return superagent.post('http://localhost:5500/api/notes')
+      return superagent.post('http://localhost:5500/api/cars')
       .set('Content-Type', 'application/json')
       .send({
-        title:'hello world',
-        content: 'this is my first note',
+        make:'this is the make',
+        model: 'this is the model',
       })
       .then(res=>{
-        expect(res.status).toEqual(200);
-        expect(res.body.title).toEqual('hello world');
-        expect(res.body.content).toEqual('this is my first note');
+        expect(res.status).toEqual(201);
+        expect(res.body.make).toEqual('this is the make');
+        expect(res.body.model).toEqual('this is the model');
       });
     });
 
-    test('should respond with a 400', () =>{
-      return superagent.post('http://localhost:5500/api/notes')
+    test('should respond with a 400 if I dont send make', () =>{
+      return superagent.post('http://localhost:5500/api/cars')
       .set('Content-Type', 'application/json')
       .send({
-        content: 'this is my first note',
+        model: 'this is the model without the make',
       })
       .then(Promise.reject)
       .catch(res=>{
@@ -38,11 +38,11 @@ describe('api/notes', function() {
       });
     });
 
-    test('should respond with a 400', () =>{
-      return superagent.post('http://localhost:5500/api/notes')
+    test('should respond with a 400 if I dont send model', () =>{
+      return superagent.post('http://localhost:5500/api/cars')
       .set('Content-Type', 'application/json')
       .send({
-        title: 'my title',
+        make: 'this is make without a model',
       })
       .then(Promise.reject)
       .catch(res=>{
