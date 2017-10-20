@@ -1,4 +1,4 @@
-![cf](https://i.imgur.com/7v5ASc8.png) Lab 09: Vanilla REST API w/ Persistence
+![cf](https://i.imgur.com/7v5ASc8.png) Lab 08: Vanilla REST API
 ======
 
 ## Submission Instructions
@@ -13,7 +13,12 @@
 * students will learn how to save resource data to the file system for a layer of data persistence
 * students will learn how to refactor commonly used coding constructs into custom helper modules
 
-## Requirements
+## Documentation
+* Server starts on PORT 3000
+* Data is stored in car/storage/car.dat
+* in the command line type `echo '{"make":"toyota", "model":"prius"'} | http post http://localhost:3000/a
+pi/cars` to post a new car
+* in the command line type `http delete http://localhost:3000/api/cars?id=<uuid>`
 
 #### Configuration
 * `package.json`
