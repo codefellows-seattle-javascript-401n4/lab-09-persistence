@@ -1,5 +1,5 @@
 'use strict';
-const parse = require('./body-parser');
+const parse = require('../body-parser');
 const routeHandlers = {
   GET: {},
   PUT: {},
@@ -24,12 +24,8 @@ module.exports = {
     routeHandlers.DELETE[uri] = callback;
   },
   route: (req, res) => {
-  // parse req
-  //return 400 if invalid
-  //find handler (400 if not there)
   parse(req)
   .then( (req) => {
-    // console.log("post:", routeHandlers[req.method]);
     let handler = routeHandlers[req.method][req.url.pathname];
     if (handler) return handler(req, res)
     else {

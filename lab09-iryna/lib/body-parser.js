@@ -1,7 +1,7 @@
 'use strict';
 const url = require('url');
 const queryString  = require('querystring');
-const route = require('./router.js');
+const route = require('./route/router.js');
 
 module.exports = (req) => {
   // console.log("request:", req.url);

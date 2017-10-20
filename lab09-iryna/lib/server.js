@@ -1,7 +1,7 @@
 'use strict';
 const http = require('http');
-const router = require('./router');
-const note = require('./note-router');
+const router = require('./route/router');
+const note = require('./route/note-router');
 // require('dotenv').config();
 const app = module.exports = http.createServer(router.route);
 let isRunning = false;
