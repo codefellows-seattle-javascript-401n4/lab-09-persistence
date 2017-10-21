@@ -1,7 +1,7 @@
 'use strict';
 
 const parser = require('./parse-request.js');
-const routeHandlers = require('../route/routes.js');
+const routeHandlers = module.exports = {};
 
 const router = module.exports = {
   route: (req, res) => {
@@ -33,6 +33,7 @@ const router = module.exports = {
 let methods = ['get', 'put', 'post', 'patch', 'delete'];
 
 methods.forEach(method => {
+  routeHandlers[method.toUpperCase()] = {};
   router[method] = function(pathname, callback){
     routeHandlers[method.toUpperCase()][pathname] = callback;
   };
