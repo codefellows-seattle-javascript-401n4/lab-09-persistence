@@ -12,7 +12,7 @@ class Note {
       this.content = config.content || "";
   }
   toString(){
-    return `${this.title}\n${this.content}`
+    return `${this.title} ${this.content}`
   }
 }
 module.exports = Note;
