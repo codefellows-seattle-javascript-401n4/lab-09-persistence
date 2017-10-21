@@ -6,6 +6,7 @@ const server = require('../lib/server');
 const superagent = require('superagent');
 
 describe('api/notes', function() {
+  
   beforeAll( () => {
     return server.start(process.env.PORT);
   });
@@ -14,6 +15,7 @@ describe('api/notes', function() {
   });
 
   describe('POST /api/notes', () => {
+
     test('should respond with a 201', () => {
       return superagent.post('http://localhost:5500/api/notes')
         .set('Content-Type', 'application/json')
@@ -51,7 +53,7 @@ describe('api/notes', function() {
           expect(res.status).toEqual(400);
         });
     });
-  });
 
+  });
 
 });
