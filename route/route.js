@@ -11,10 +11,10 @@ router.post('/api/Sushi', (req,res) => {
   if(! req.body.name && req.body.fish){
     return response.sendStatus(res,400,'missing body');
   }
-  let sushi = new Sushi(req.body);
+  let sushi = new Sushi(req.body.name,req.body.fish);
   storage.saveItem(sushi)
   .then( item => response.sendJSON(res,200,item))
-  .catch(err => response.sendStatus(res,400,err));
+  .catch(err =>  response.sendStatus(res,400,err));
 });
 
 router.get('/api/Sushi', (req,res) => {
