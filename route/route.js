@@ -8,7 +8,7 @@ const databaseFile = __dirname + "../model/data/sushi.dat";
 const storage = require('../lib/storage.js')(databaseFile);
 
 router.post('/api/Sushi', (req,res) => {
-  if(! req.body.name && req.body.fish){
+  if(! (req.body.name && req.body.fish)){
     return response.sendStatus(res,400,'missing body');
   }
   let sushi = new Sushi(req.body.name,req.body.fish);
