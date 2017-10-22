@@ -50,7 +50,7 @@ router.get('/api/notes', (req,res) => {
   }
 });
 
-router.delete('api/notes', (req,res) => {
+router.delete('/api/notes', (req,res) => {
   let id = req.url && req.url.query && req.url.query.id;
 
   if(id) {
