@@ -1,0 +1,31 @@
+{
+  "name": "lab-09-persistence",
+  "version": "1.0.0",
+  "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 09: Vanilla REST API w/ Persistence ======",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyleeAndrews/lab-09-persistence.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyleeAndrews/lab-09-persistence/issues"
+  },
+  "homepage": "https://github.com/RyleeAndrews/lab-09-persistence#readme",
+  "devDependencies": {
+    "expect": "^21.2.1",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "superagent": "^3.7.0"
+  },
+  "dependencies": {
+    "fs-extra": "^4.0.2",
+    "uuid": "^3.1.0"
+  }
+}
