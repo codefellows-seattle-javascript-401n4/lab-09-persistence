@@ -13,7 +13,7 @@ let mockPathExists = (file) => {
 
 let mockReadJson = (file) => {
   let json = {
-    foo:'bar',
+    read:'book',
   };
   if (file) {
     return Promise.resolve(json);

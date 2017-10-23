@@ -4,7 +4,9 @@
   "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 09: Vanilla REST API w/ Persistence ======",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "jest -i --coverage --verbose",
+    "watch": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,10 @@
   },
   "dependencies": {
     "dotenv": "^4.0.0",
-    "fs-extra": "^4.0.2"
+    "fs-extra": "^4.0.2",
+    "uuid": "^3.1.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }

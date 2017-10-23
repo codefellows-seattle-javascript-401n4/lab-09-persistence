@@ -1,4 +1,5 @@
 'use strict';
+
 const Note = require('../model/note');
 const router = require('../lib/router');
 
@@ -55,7 +56,7 @@ router.delete('/api/notes', (req,res) => {
 
   if(id) {
     storage.deleteItem(id)
-      .then(sendJSON(res, 200, 'OK'))
+      .then(sendJSON(res, 200, 'Successfully Deleted'))
       .catch(error => sendStatus(res, 500, error));
   }
 });
