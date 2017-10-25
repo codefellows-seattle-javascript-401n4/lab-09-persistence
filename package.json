@@ -1,0 +1,23 @@
+{
+  "name": "lab-package-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "nodemon ./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "superagent": "^3.7.0"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "fs-extra": "^4.0.2",
+    "uuid": "^3.1.0"
+  }
+}
