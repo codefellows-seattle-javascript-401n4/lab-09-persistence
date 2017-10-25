@@ -1,19 +1,19 @@
 {
-  "name": "server",
+  "name": "lab-package-json",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest -i --coverage",
-    "watch": "nodemon index.js",
-    "start": "node index.js"
+    "test": "mocha",
+    "start": "nodemon ./index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^21.2.1",
-    "superagent": "^3.6.3"
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "superagent": "^3.7.0"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
