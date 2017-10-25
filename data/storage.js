@@ -54,9 +54,9 @@ Storage.deleteNote = (note) => {
         Storage.fileExists().then(exists => {
             if (!exists) resolve('File does not exist');
             Storage.readFile().then(contents => {
-                if (typeof contents[note.id] === 'undefined') resolve('Note does not exist to be deleted.');
-                contents[note.id] = null;
-                delete contents[note.id];
+                if (typeof contents[note] === 'undefined') resolve('Note does not exist to be deleted.');
+                contents[note] = null;
+                delete contents[note];
                 fsextra.writeJson(Storage.path, contents, err => {
                     if (err) resolve('Error deleting note');
                     resolve('Note Deleted.');
