@@ -54,4 +54,61 @@ class Storage {
     });
   }
 
+  deleteItem(id){
+    return new Promise( (resolve, reject) =>{
+      if(!id){
+        reject('ID required');
+      }
+
+      this.getAll()
+        .then(data => {
+          if(data[id]){
+            delete data[id];
+            fs.outputJson(this.databaseFile, data)
+              .then( () => {
+                resolve('Item deleted');
+              })
+              .catch(err => {
+                reject(err);
+              });
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  replaceItem(id, newContent, newName){
+    return new Promise( (resolve, reject) => {
+      if(!id){
+        reject('ID required');
+      }
+
+      this.getAll()
+        .then(data => {
+          if(data[id]){
+            data[id].content = newContent;
+            data[id].name = newName;
+            fs.outputJSON(this.databaseFile, data)
+              .then( () => {
+                resolve(data[id]);
+              })
+              .catch(err => {
+                reject(err);
+              });
+          } else {
+            reject('ID not found');
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
 }
+
+module.exports = (db) => {
+  return new Storage(db);
+};
