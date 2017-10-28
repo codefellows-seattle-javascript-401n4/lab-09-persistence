@@ -3,7 +3,7 @@
 const Note = require('../model/NoteCon.js');
 const router = require('../lib/router.js');
 const send = require('../lib/send.js');
-const databaseFile = './model/data/notes.dat';
+const databaseFile = '../lab-james/model/data/notes.dat';
 const storage = require('../lib/storage')(databaseFile);
 
 router.storage = storage;

@@ -10,7 +10,7 @@ class Note {
   }
 
   toString(){
-    return `${this.name}\r\n${this.content}1`;
+    return `${this.name}\r\n${this.content}`;
   }
 }
 

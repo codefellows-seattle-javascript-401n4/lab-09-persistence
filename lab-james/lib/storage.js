@@ -87,6 +87,7 @@ class Storage {
 
       this.getAll()
         .then(data => {
+
           if(data[id]){
             data[id].content = newContent;
             data[id].name = newName;
@@ -97,8 +98,11 @@ class Storage {
               .catch(err => {
                 reject(err);
               });
+
           } else {
+
             reject('ID not found');
+
           }
         })
         .catch(err => {
