@@ -9,11 +9,11 @@ let isRunning = false;
 const app = http.createServer(router.route);
 
 module.exports = {
-  start: (port) => {
+  start: () => {
     return new Promise( (resolve, reject) => {
       if(!isRunning){
 
-        app.listen(port, err => {
+        app.listen(3000, err => {
           if(err){
             reject(err);
           } else {
@@ -45,7 +45,7 @@ module.exports = {
             resolve(console.log('Server off'));
           }
         });
-        
+
       }
     });
   },

@@ -20,10 +20,8 @@ module.exports = (req) => {
 
     req.on('end', () => {
       try {
-        console.log(text);
         if(req.headers['content-type'] === 'application/json'){
           req.body = JSON.parse(text);
-          console.log(req.body);
         }
         resolve(req);
       }

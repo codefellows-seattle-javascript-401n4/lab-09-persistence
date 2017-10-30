@@ -15,7 +15,7 @@ router.get('/api/notes', (req, res) => {
     return router.storage.getItem(id)
     .then(item => send.JSON(res, 200, item))
     .catch(err => {
-      send.status(res, 500, err);
+      send.status(res, 404, err);
     });
 
   } else {
