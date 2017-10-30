@@ -39,7 +39,7 @@ class Storage {
     return new Promise( (resolve, reject) =>{
       this.getAll()
         .then(data => {
-          data[item.id] = item;
+          data[item.uuid] = item;
           fs.outputJson(this.databaseFile, data)
             .then( () => {
               resolve(item);

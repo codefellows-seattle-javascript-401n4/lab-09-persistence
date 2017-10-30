@@ -61,7 +61,7 @@ router.put('/api/notes', (req, res) => {
     return send.status(res, 400, 'Missing name');
   }
 
-  return router.storage.replace(id, req.body.content, req.body.name)
+  return router.storage.replaceItem(id, req.body.content, req.body.name)
     .then(item => {
       send.JSON(res, 200, item);
     })
@@ -72,10 +72,10 @@ router.put('/api/notes', (req, res) => {
 });
 
 router.delete('/api/notes', (req, res) => {
-  let id = req.ur.query.id;
+  let id = req.url.query.id;
 
   if(id){
-    return router.storage.delete(id)
+    return router.storage.deleteItem(id)
       .then(send.JSON(res, 200, 'Item deleted'))
       .catch(err => {
         send.status(res, 500, err);
