@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/JBEpstein/lab-09-persistence#readme",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "fs-extra": "^4.0.2"
   }
 }
