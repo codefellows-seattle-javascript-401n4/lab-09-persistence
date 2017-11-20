@@ -2,37 +2,24 @@
 
 const Note = require('../model/data/noteModel.js');
 const router = require('../lib/router.js');
-
-
-let notes = [];
-
-let sendStatus = (res, status, text) => {
-  res.writeHead(status);
-  res.write(text);
-  res.end();
-};
-
-let sendJSON = (res, status, data) => {
-  res.writeHead(status, {
-    'Content-Type': 'application/json',
-  });
-  res.end(JSON.stringify(data));
-};
+const fs = require('fs-extra');
+const dbFile = __dirname + '/../model/data/notes.dat';
+const storage = require('../storage.js')(dbFile);
+const response = require('../response.js');
 
 router.post('/api/notes', (req, res) => {
   if(!req.body.title) {
-    return sendStatus(res, 404 , 'No Title Found');
+    return response.sendStatus(res, 404 , 'No Title Found');
   }
   if(!req.body.content) {
-    return sendStatus(res, 404, 'No Content Found');
+    return response.sendStatus(res, 404, 'No Content Found');
   } else {
-
     let note = new Note(req.body);
-    notes.push(note);
 
-    sendJSON(res, 201, note);
+    storage.saveItem(note)
+      .then(item => response.sendJSON(res, 200, item))
+      .catch(err => response.sendStatus(res, 500, err));
   }
-
 });
 
 
@@ -40,16 +27,12 @@ router.get('/api/notes', (req,res) => {
   let id = req.url && req.url.query && req.url.query.id;
 
   if(id) {
-    let note = notes.filter( (note) => {
-      return note.id === id;
-    });
-    if (note) {
-      sendJSON(res, 200, note);
-    } else {
-      sendStatus(res, 404, 'Note Not Found');
-    }
+    storage.getItem(id)
+      .then(item => response.sendJSON(res, 200, item))
+      .catch(err => response.sendStatus(res, 404, err));
   } else {
-    let everyNote = {allNotes: notes};
-    sendJSON(res, 200, everyNote);
+    storage.getAll()
+      .then(everything => response.sendJSON(res, 200, everything))
+      .catch(err => response.sendStatus(res, 404, err));
   }
 });
