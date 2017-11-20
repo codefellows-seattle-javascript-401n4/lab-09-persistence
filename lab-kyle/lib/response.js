@@ -2,10 +2,9 @@
 
 module.exports = {
 
-  sendStatus: (res, status, text) => {
+  sendStatus: (res, status, data) => {
     res.writeHead(status);
-    res.write(text);
-    res.end();
+    res.end(data);
   },
   sendJSON: (res, status, data) => {
     res.writeHead(status, {

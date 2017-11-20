@@ -2,10 +2,9 @@
 
 const Note = require('../model/data/noteModel.js');
 const router = require('../lib/router.js');
-const fs = require('fs-extra');
 const dbFile = __dirname + '/../model/data/notes.dat';
-const storage = require('../storage.js')(dbFile);
-const response = require('../response.js');
+const storage = require('../lib/storage.js')(dbFile);
+const response = require('../lib/response.js');
 
 router.post('/api/notes', (req, res) => {
   if(!req.body.title) {
@@ -17,7 +16,7 @@ router.post('/api/notes', (req, res) => {
     let note = new Note(req.body);
 
     storage.saveItem(note)
-      .then(item => response.sendJSON(res, 200, item))
+      .then(item => response.sendJSON(res, 201, item))
       .catch(err => response.sendStatus(res, 500, err));
   }
 });
